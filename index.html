@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>washing machine prototype</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+	<style>
+
+		*{
+			box-sizing: border-box;
+		}
+
+		html, body{
+			background-color: rgb(30, 30, 30);
+			color: #c3ff82;
+			font-family: Roboto;
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+		}
+
+		#container{
+			width: 100%;
+			height: 70%;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.col{
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 100%;
+			align-items: center;
+		}
+
+		.row{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			flex: 0 0 65vw;
+		}
+
+		#settings{
+			flex-basis: 65vw;
+		}
+
+		.selections{
+			justify-content: flex-end;
+		}
+
+		.selections div{
+			text-transform: capitalize;
+			line-height: 50px;
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 20px;
+			opacity: 0.3;
+		}
+
+		.selected{
+			opacity: 1 !important;
+			border: 1px solid  #c3ff8266;
+			border-radius: 4px;
+		}
+
+		#time-box{
+			flex: 0 0 35vw;
+			padding: 15px;
+			justify-content: space-between;
+			align-items: flex-end;
+			font-size: 28px;
+			border-left: 2px solid #c3ff8244;
+		}
+
+		#time-box div{
+			width: 100%;
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		#time{
+			font-size: 80px;
+			justify-content: flex-end !important;
+		}
+
+	</style>
+
+</head>
+<body>
+	<div id="container">
+		<div class="row">
+			<div class="row" id="settings">
+				<div class="selections col">
+					<div class="selected">cold</div>
+					<div>warm</div>
+					<div>hot</div>
+				</div>
+				<div class="selections col">
+					<div class="selected">small</div>
+					<div>medium</div>
+					<div>large</div>
+				</div>
+				<div class="selections col">
+					<div class="selected">handwash</div>
+					<div>delicate</div>
+					<div>regular</div>
+					<div>heavy duty</div>
+				</div>
+				<div class="selections col">
+					<div class="selected">yes</div>
+					<div>no</div>
+				</div>
+			</div>
+			<div class="col" id="time-box">
+				<div>WASHING</div>
+				<div id="time">36min</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function toggle(item){
+			let children = item.children;
+			let selected_index = 0;
+			for(let i = 0; i < children.length; i++){
+				if(children[i].classList.contains("selected")){
+					selected_index = i;
+				}
+			}
+			let ni = (selected_index + 1)%children.length;
+			children[selected_index].classList.remove("selected");
+			children[ni].classList.add("selected");
+		}
+
+		document.querySelectorAll('.selections').forEach(item => {
+			item.addEventListener('click', () => toggle(item));
+			console.log(item);
+		})
+	</script>
+</body>
+</html>
